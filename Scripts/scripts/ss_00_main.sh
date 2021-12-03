@@ -200,7 +200,7 @@ BTCPAY_LN...........: $BTCPAY_LN
 
 # prompt user before continuing with installation
 if ! "$NOPROMPT"; then
-  read -rp  "Continue with installation? (Y/n): " confirm
+  read -rp  "Continue with installation? (y/N): " confirm
 fi
 
 if [[ "$confirm" != [yY] ]]; then

@@ -16,7 +16,7 @@ echo "
 
 # CURRENT BITCOIN RELEASE:
 # Change as necessary
-export BITCOIN="bitcoin-core-0.20.1"
+export BITCOIN="bitcoin-core-22.0"
 export BITCOINPLAIN=`echo $BITCOIN | sed 's/bitcoin-core/bitcoin/'`
 
 # # get bitcoin tar.gz, shasums and signing keys

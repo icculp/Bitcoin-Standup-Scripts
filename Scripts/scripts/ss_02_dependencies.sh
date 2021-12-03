@@ -20,4 +20,8 @@ apt-get -y install unattended-upgrades
 
 # deny all incoming connections except SSH
 ufw allow ssh
-ufw enable
+if ! "$NOPROMPT"; then
+  ufw enable
+else
+  echo "y" | sudo ufw enable
+fi
