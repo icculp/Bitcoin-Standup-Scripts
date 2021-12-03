@@ -11,5 +11,13 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 
-sudo apt-get install gnupg2 make git -y
+sudo apt-get install gnupg2 make git haveged ufw -y
 
+# Set system to automatically update
+echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-set-selections
+apt-get -y install unattended-upgrades
+
+
+# deny all incoming connections except SSH
+ufw allow ssh
+ufw enable
