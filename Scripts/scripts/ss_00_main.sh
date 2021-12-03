@@ -221,11 +221,6 @@ $MESSAGE_PREFIX Starting Debian updates; this will take a while!
 ----------------
 "
 
-# Make sure all packages are up-to-date
-apt-get update
-apt-get upgrade -y
-apt-get dist-upgrade -y
-
 # source dependency script
 source ./ss_02_dependencies.sh
 
@@ -314,7 +309,7 @@ cd "$SCRIPTS_DIR"
 cp -r $SCRIPTS_DIR ~standup/
 chown standup ~standup/scripts-conf
 cd ~standup/scripts-conf
-rm -r $SCRIPTS_DIR
+# rm -r $SCRIPTS_DIR
 
 # Finished, exit script
 return 0
