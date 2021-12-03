@@ -1,6 +1,8 @@
 # Bitcoin Standup Scripts - Blockchain Commons
 
-Contributor: jodobear 20-07-03
+Contributors: 
+Primary jodobear[github.com/jodobear] 20-07-03
+Secondary icculp[github.com/icculp]
 
 **DISCLAIMER:** It is not a good idea to store large amounts of Bitcoin on a VPS, ideally you should use this as a watch-only wallet. This script is a work-in-progress and has not been widely tested. The creators are not responsible for loss of funds. If you are not familiar with running a node or how Bitcoin works then we urge you to use this in testnet so that you can use it as a learning tool.
 
@@ -13,22 +15,37 @@ It downloads Bitcoin Core over Tor. You can specify any path for the blockchain 
 
 To run this script you need to be logged in as root, and enter in the commands listed below:
 
-(The $ or # represents a terminal commmand prompt, do not actually type in a $ or #.)
+If you don't already have a password for the root user, go ahead and set one now.
+```
+# Give the root user a password, enter the following command and set a password:
+sudo passwd
 
-1. Give the root user a password, enter the following command and set a password:
-$ sudo passwd
+# Switch to the root user:
+sudo su
+```
 
-2. Switch to the root user:
-$ sudo su
+3. Might need to install git and clone the repo, which will require an update, or you can copy 02_dependencies.sh and run it:
+```
+sudo apt-get update -y && apt-get install git -y
+cd ~
+git clone https://github.com/icculp/Bitcoin-Standup-Scripts.git
+cd Bitcoin-Standup-Scripts/Scripts/scripts
+```
 
 3. Edit config for your node setup using your favourite text editor:
-# nano ss.conf
+```
+nano ss.conf
+```
 
 4. Source the script:
-# source ss_00_main.sh
+```
+source ss_00_main.sh
+```
 
-5. Display help:
-# source ss_00_main.sh -h
+Display help:
+```
+source ss_00_main.sh -h
+```
 
 This script can be installed on any Debian based system. By default this script will:
 
@@ -44,19 +61,20 @@ This script can be installed on any Debian based system. By default this script 
 Optionally you can install:
 ---------------------------
 - Install c-lightning or LND
-- Install Esplora
-- Install BTCPay**
+- Install Esplora*
+- Install BTCPay*
+- Install Cypherpunkpay*
 
-** Work-in-progress
+* Work-in-progress
 
 QR Code:
 --------
 Upon completion of the script there will be a QR code saved to /qrcode.png which you can open and scan:
 
 1. Install fim:
-$ sudo apt-get install fim
+`sudo apt-get install fim -y`
 2. Then, display the QR code in terminal (as root):
-# fim -a qrcode.png
+`fim -a qrcode.png`
 
 It is highly recommended to add a Tor V3 pubkey for cookie authentication so that even if your QR code is compromised an attacker would not be able to access your node.
 
@@ -71,3 +89,7 @@ Additionally, unless you face installation issues and need to assisstance delete
 3. Check implementation & test FastSync.
 4. C-lightning HTTP plugin.
 5. Explore HWI.
+
+
+6. Additional hardening
+7. Esplora, BTCPay, Cypherpunkpay
