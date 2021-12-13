@@ -26,7 +26,7 @@ sudo su
 
 Once you're ready to get started, the following script will install git and download the repo:
 ```
-curl -s https://raw.githubusercontent.com/icculp/Bitcoin-Standup-Scripts/master/Scripts/scripts/init.sh | sudo bash
+curl -s https://raw.githubusercontent.com/icculp/Bitcoin-Standup-Scripts/master/Scripts/scripts/init.sh | sudo bash -s
 ```
 
 Edit config for your node setup using your favourite text editor:
