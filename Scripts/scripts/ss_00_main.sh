@@ -198,17 +198,17 @@ BTCPAY_LN...........: $BTCPAY_LN
 # HTTP_PASS...........: $HTTP_PASS
 
 
-# prompt user before continuing with installation
+# prompt user before continuing with installation, default to Y
 if ! "$NOPROMPT"; then
-  read -rp  "Continue with installation? (y/N): " confirm
+  read -rp  "Continue with installation? (Y/n): " confirm
 fi
 
-if [[ "$confirm" != [yY] ]]; then
-  echo "Entered $confirm. Exiting.."
-  return 4
-else
+if [[ "$confirm" =~ [yY] || -z "$confirm" ]]; then
   NOPROMPT=true
   echo "Installing Bitcoin!"
+else
+  echo "Entered $confirm. Exiting.."
+  return 4
 fi
 
 
