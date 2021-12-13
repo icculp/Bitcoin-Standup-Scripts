@@ -16,7 +16,7 @@ sudo apt-get install gnupg2 make git haveged ufw -y
 # Set system to automatically update
 echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-set-selections
 apt-get -y install unattended-upgrades
-
+# sudo dpkg-reconfigure -plow unattended-upgrades
 
 # deny all incoming connections except SSH
 ufw allow ssh

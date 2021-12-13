@@ -1,0 +1,17 @@
+# TODO
+
+add ss_02_dependencies
+loggging redirects
+
+update bitcoin-core to 22.0
+		checksums don't match, troubleshoot
+
+install and configure ufw
+	open ports for each service if installed
+	
+
+verify checksums for each service?
+
+add cypherpunkpay script
+	add variabes into ss.conf
+	verify working

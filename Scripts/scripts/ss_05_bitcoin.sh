@@ -55,11 +55,13 @@ $MESSAGE_PREFIX SHA256SSUMS.asc exists at /home/standup/
 "
 fi
 
-if ! [[ -f ~standup/laanwj-releases.asc ]]; then
+if ! [[ -f ~standup/keys.txt ]]; then
   echo "
 $MESSAGE_PREFIX downloading laanwj-release signature
 "
-sudo -u standup wget https://bitcoin.org/laanwj-releases.asc -O ~standup/laanwj-releases.asc
+# import keys from all current trusted builders
+sudo -u standup wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/builder-keys/keys.txt -O ~standup/keys.txt
+sudo -u standup  sh -c 'while read fingerprint keyholder_name; do gpg --keyserver hkps://keys.openpgp.org --recv-keys ${fingerprint}; done < ~standup/keys.txt'
 fi
 
 # Verifying Bitcoin: Signature
@@ -69,7 +71,8 @@ $MESSAGE_PREFIX Verifying Bitcoin.
 -----------------
 "
 
-sudo -u standup /usr/bin/gpg --no-tty --import ~standup/laanwj-releases.asc
+# obsolete, doesn't contain checksums for 22.0
+# sudo -u standup /usr/bin/gpg --no-tty --import ~standup/laanwj-releases.asc
 export BTC_SHASIG=`sudo -u standup /usr/bin/gpg --no-tty --verify ~standup/SHA256SUMS.asc 2>&1 | grep "Good signature" | awk '{print $2, $3}'`
 
 if [[ $BTC_SHASIG ]]; then
@@ -231,7 +234,7 @@ ExecStart=/usr/local/bin/bitcoind -conf=/home/standup/.bitcoin/bitcoin.conf
 
 # Process management
 ####################
-Type=simple
+Typ		e=simple
 PIDFile=/run/bitcoind/bitcoind.pid
 Restart=on-failure
 
