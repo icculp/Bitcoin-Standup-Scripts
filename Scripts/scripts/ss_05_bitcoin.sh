@@ -33,31 +33,31 @@ if ! [[ -f ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz ]]; then
 $MESSAGE_PREFIX Downloading $BITCOIN, this will take a while!
 ----------------
   "
-
-sudo -u standup torsocks wget --progress=bar:force http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz -O ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz
-fi
-
-if [[ -f ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz ]] && ! [[ -f ~standup/SHA256SUMS.asc ]]; then
-  echo "
-$MESSAGE_PREFIX $BITCOINPLAIN-x86_64-linux-gnu.tar.gz exists at /home/standup/
-  "
-  echo "
-$MESSAGE_PREFIX downloading SHA256SUMS.asc for $BITCOIN
-  "
-sudo -u standup torsocks wget http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/SHA256SUMS.asc -O ~standup/SHA256SUMS.asc
+  sudo -u standup torsocks wget --progress=bar:force http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz -O ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz
 else
-  return 100
+  echo "
+----------------
+$MESSAGE_PREFIX $BITCOINPLAIN-x86_64-linux-gnu.tar.gz exists at /home/standup/
+----------------
+  "
 fi
+
+
 
 if [[ -f ~standup/SHA256SUMS.asc ]]; then
   echo "
 $MESSAGE_PREFIX SHA256SSUMS.asc exists at /home/standup/
 "
+else
+  echo "
+$MESSAGE_PREFIX downloading SHA256SSUMS.asc to /home/standup/
+"
+  sudo -u standup torsocks wget http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/SHA256SUMS.asc -O ~standup/SHA256SUMS.asc
 fi
 
 if ! [[ -f ~standup/keys.txt ]]; then
   echo "
-$MESSAGE_PREFIX downloading laanwj-release signature
+$MESSAGE_PREFIX downloading signatures from all trusted core devs
 "
 # import keys from all current trusted builders
 sudo -u standup wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/builder-keys/keys.txt -O ~standup/keys.txt
@@ -202,7 +202,7 @@ rpcport=18332
 rpcbind=127.0.0.1
 rpcport=8332
 [regtest]
-rpcbind=127.0.0.1
+rpcbind=127.0.0.1	
 rpcport=18443
 EOF
 
