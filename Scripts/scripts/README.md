@@ -15,10 +15,6 @@ It downloads Bitcoin Core over Tor. You can specify any path for the blockchain 
 
 To run this script you need to be logged in as root, and enter in the commands listed below:
 
-curl -s this_repo_url | sudo bash
-
-
-
 If you don't already have a password for the root user, go ahead and set one now.
 ```
 # Give the root user a password, enter the following command and set a password:
@@ -28,21 +24,17 @@ sudo passwd
 sudo su
 ```
 
-3. Might need to install git and clone the repo, which will require an update, or you can copy 02_dependencies.sh and run it:
+Once you're ready to get started, the following script will install git and download the repo:
 ```
-sudo apt-get update -y && apt-get install git -y
-cd ~
-git clone https://github.com/icculp/Bitcoin-Standup-Scripts.git
-cd Bitcoin-Standup-Scripts/Scripts/scripts
-echo "Modify ss.conf as required, or jump straight to source ss_00_main.sh"
+curl -s https://raw.githubusercontent.com/icculp/Bitcoin-Standup-Scripts/master/Scripts/scripts/init.sh | sudo bash
 ```
 
-3. Edit config for your node setup using your favourite text editor:
+Edit config for your node setup using your favourite text editor:
 ```
 nano ss.conf
 ```
 
-4. Source the script:
+Source the script when you've configured ss.conf to suit your needs and you're ready to install Bitcoin with specified plugins:
 ```
 source ss_00_main.sh
 ```
