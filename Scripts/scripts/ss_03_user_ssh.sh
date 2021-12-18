@@ -32,6 +32,7 @@ if [ -n "$SSH_KEY" ] && [[ "$SSH_KEY" != "__UNDEFINED__" ]]; then
   mkdir ~standup/.ssh
   echo "$SSH_KEY" >> ~standup/.ssh/authorized_keys
   chown -R standup ~standup/.ssh
+  chmod 0400 ~standup/.ssh/authorized_keys
   echo "
 ----------------
 $MESSAGE_PREFIX Added .ssh key to standup.

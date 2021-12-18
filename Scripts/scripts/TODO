@@ -3,15 +3,27 @@
 add ss_02_dependencies
 loggging redirects
 
+update shebangs to #!/usr/bin/env bash
+change default network to testnet
+
 update bitcoin-core to 22.0
 		checksums don't match, troubleshoot
+			Imported keys from all current trusted core devs
 
 install and configure ufw
 	open ports for each service if installed
 	
+Fix default Y/n to accept Yy on empty return
 
 verify checksums for each service?
 
 add cypherpunkpay script
 	add variabes into ss.conf
 	verify working
+
+test tor v3 public key
+test ssh key
+test 
+test c-lightning
+test lnd
+expand esplora script

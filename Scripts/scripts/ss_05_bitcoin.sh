@@ -320,4 +320,5 @@ fi
 /bin/rm -rf ~standup/"$BITCOINPLAIN"/
 /bin/rm ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz
 /bin/rm ~standup/keys.txt
+/bin/rm ~standup/SHA256*
 
