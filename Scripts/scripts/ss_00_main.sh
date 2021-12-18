@@ -307,9 +307,9 @@ cd "$SCRIPTS_DIR"
 
 # move the stack scripts to user standup
 cp -r $SCRIPTS_DIR ~standup/
-chown standup ~standup/scripts-conf
-cd ~standup/scripts-conf
-# rm -r $SCRIPTS_DIR
+chown -R standup ~standup/scripts
+cd ~standup/scripts
+rm -r $SCRIPTS_DIR
 
 # Finished, exit script
 return 0

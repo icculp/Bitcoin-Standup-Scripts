@@ -53,6 +53,7 @@ else
 $MESSAGE_PREFIX downloading SHA256SSUMS.asc to /home/standup/
 "
   sudo -u standup torsocks wget http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/SHA256SUMS.asc -O ~standup/SHA256SUMS.asc
+  sudo -u standup torsocks wget http://6hasakffvppilxgehrswmffqurlcjjjhd76jgvaqmsg6ul25s7t3rzyd.onion/bin/"$BITCOIN"/SHA256SUMS -O ~standup/SHA256SUMS
 fi
 
 if ! [[ -f ~standup/keys.txt ]]; then
@@ -61,7 +62,7 @@ $MESSAGE_PREFIX downloading signatures from all trusted core devs
 "
 # import keys from all current trusted builders
 sudo -u standup wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/builder-keys/keys.txt -O ~standup/keys.txt
-sudo -u standup  sh -c 'while read fingerprint keyholder_name; do gpg --keyserver hkps://keys.openpgp.org --recv-keys ${fingerprint}; done < ~standup/keys.txt'
+sudo -u standup sh -c 'while read fingerprint keyholder_name; do gpg --keyserver hkps://keys.openpgp.org --recv-keys ${fingerprint}; done < ~standup/keys.txt'
 fi
 
 # Verifying Bitcoin: Signature
@@ -88,7 +89,7 @@ fi
 
 # Verify Bitcoin: SHA
 export BTC_TARSHA256=`/usr/bin/sha256sum ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz | awk '{print $1}'`
-export BTC_EXPECTEDSHA256=`cat ~standup/SHA256SUMS.asc | grep "$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz | awk '{print $1}'`
+export BTC_EXPECTEDSHA256=`cat ~standup/SHA256SUMS | grep "$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz | awk '{print $1}'`
 
 if [[ "$BTC_TARSHA256" = "$BTC_EXPECTEDSHA256" ]]; then
   echo "
@@ -104,7 +105,6 @@ fi
 # Install Bitcoin
 sudo -u standup /bin/tar xzf ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz -C ~standup
 /usr/bin/install -m 0755 -o root -g root -t /usr/local/bin ~standup/"$BITCOINPLAIN"/bin/*
-/bin/rm -rf ~standup/"$BITCOINPLAIN"/
 
 # Start Up Bitcoin
 echo "
@@ -313,3 +313,11 @@ else
 ERROR: Bitcoind service not running hence QR code or URI  not generated. Exiting.
   "
 fi
+
+
+
+# cleanup
+/bin/rm -rf ~standup/"$BITCOINPLAIN"/
+/bin/rm ~standup/"$BITCOINPLAIN"-x86_64-linux-gnu.tar.gz
+/bin/rm ~standup/keys.txt
+
