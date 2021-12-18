@@ -21,9 +21,11 @@ add cypherpunkpay script
 	add variabes into ss.conf
 	verify working
 
-test tor v3 public key
-test ssh key
-test 
-test c-lightning
-test lnd
-expand esplora script
+test:
+	tor v3 public key
+	ssh key 
+	c-lightning
+	lnd
+
+add esplora scripts
+fastsync
